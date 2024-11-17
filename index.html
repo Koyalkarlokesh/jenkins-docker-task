@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Frontend 3-Tier Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .form-container {
+            margin: 30px auto;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            width: 300px;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+
+        .users-list {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .users-list p {
+            font-size: 18px;
+            color: #333;
+        }
+
+        .user-item {
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h1>Simple Frontend Website</h1>
+
+    <div class="form-container">
+        <input type="text" id="username" placeholder="Enter your name" />
+        <button onclick="submitName()">Submit</button>
+    </div>
+
+    <div class="users-list" id="users-list">
+        <!-- Submitted user names will appear here -->
+    </div>
+
+    <script>
+        // This array will temporarily store the names, simulating data from a database
+        let users = [];
+
+        // Function to render the list of users
+        function renderUsers() {
+            const usersList = document.getElementById('users-list');
+            usersList.innerHTML = '<h3>Submitted Names:</h3>';  // Header for the list
+            
+            if (users.length === 0) {
+                usersList.innerHTML += '<p>No users submitted yet!</p>';
+            } else {
+                users.forEach(user => {
+                    usersList.innerHTML += `<div class="user-item">${user}</div>`;
+                });
+            }
+        }
+
+        // Function to handle form submission
+        function submitName() {
+            const name = document.getElementById('username').value.trim();
+
+            if (name) {
+                users.push(name);  // Add the name to the array
+                renderUsers();     // Re-render the user list
+                document.getElementById('username').value = ''; // Clear the input field
+            } else {
+                alert('Please enter a valid name!');
+            }
+        }
+
+        // Initial render
+        renderUsers();
+    </script>
+
+</body>
+</html>
